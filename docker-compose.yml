@@ -3,14 +3,14 @@ services:
     build:
       context:  .
       dockerfile: Dockerfile
-    container_name: Autoceste backend
+    container_name: autoceste_backend
     ports:
-      - "18080:8090"
+      - "18080:9000"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/autocesteBazaPodataka
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - test
 
   db:
     image: postgres:12.4-alpine
