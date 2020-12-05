@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import static diplomski.autoceste.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
-    STUDENT(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet(COURSE_READ,COURSE_WRITE,STUDENT_READ,STUDENT_WRITE)),
-    ADMINTRAINEE(Sets.newHashSet(COURSE_READ,STUDENT_READ));
+    ADMIN(Sets.newHashSet(ADMIN_READ, ADMIN_WRITE, USER_READ, USER_WRITE, ORGANIZATION_READ, ORGANIZATION_WRITE)),
+    USER(Sets.newHashSet(USER_WRITE, USER_READ)),
+    ORGANIZATION(Sets.newHashSet(ORGANIZATION_READ, ORGANIZATION_WRITE));
 
     private final Set<ApplicationUserPermission> permissions;
 

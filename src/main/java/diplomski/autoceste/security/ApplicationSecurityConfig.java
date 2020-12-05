@@ -51,7 +51,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(),jwtConfig,secretKey))
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/api/**").hasRole(STUDENT.name())
+                .antMatchers("/api/**").hasRole(USER.name())
                 .anyRequest()
                 .authenticated();
     }
@@ -64,7 +64,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .username("slavko")
                 .password(passwordEncoder.encode("password"))
                 // .roles(STUDENT.name()) //ROLE_STUDENT
-                .authorities(STUDENT.getGrauntedAuthorities())
+                .authorities(USER.getGrauntedAuthorities())
                 .build();
 
         UserDetails zdeslav = User.builder()
@@ -78,7 +78,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .username("miroslav")
                 .password(passwordEncoder.encode("password"))
                 //.roles(ADMINTRAINEE.name()) //ROLE_ADMINTRAINEE
-                .authorities(ADMINTRAINEE.getGrauntedAuthorities())
+                .authorities(ADMIN.getGrauntedAuthorities())
                 .build();
         return new InMemoryUserDetailsManager(
                 slavkoUser,
