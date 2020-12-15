@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import diplomski.autoceste.auth.ApplicationUserService;
+import diplomski.autoceste.auth.tutorial.ApplicationUserService;
 import diplomski.autoceste.jwt.JwtConfig;
 import diplomski.autoceste.jwt.JwtTokenVerifier;
 import diplomski.autoceste.jwt.JwtUsernameAndPasswordAuthenticationFilter;

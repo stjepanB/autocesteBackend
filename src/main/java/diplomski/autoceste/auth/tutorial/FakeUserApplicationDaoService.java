@@ -1,4 +1,4 @@
-package diplomski.autoceste.auth;
+package diplomski.autoceste.auth.tutorial;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;

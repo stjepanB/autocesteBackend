@@ -6,24 +6,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Set;
 
-public class ApplicationUser implements UserDetails {
+public class AutocesteUserDetails implements UserDetails {
+
+
+
+
 
     private final Set<?extends GrantedAuthority> grantedAuthorities;
     private final String password;
-    private final String username;
+    private final String email;
     private final boolean isAccountNonExpired;
     private final boolean isAccountNonLocked;
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
-    public ApplicationUser(Set<? extends GrantedAuthority> grantedAuthorities,
-                           String password, String username, boolean isAccountNonExpired,
-                           boolean isAccountNonLocked, boolean isCredentialsNonExpired,
-                           boolean isEnabled) {
 
+    public AutocesteUserDetails(Set<? extends GrantedAuthority> grantedAuthorities, String password, String email, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.grantedAuthorities = grantedAuthorities;
         this.password = password;
-        this.username = username;
+        this.email = email;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -32,7 +33,7 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return grantedAuthorities;
+        return null;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -59,6 +60,7 @@ public class ApplicationUser implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
     }
+
 
     @Override
     public boolean isEnabled() {
