@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static diplomski.autoceste.security.ApplicationUserRole.*;
+import static diplomski.autoceste.security.tutorial.ApplicationUserRole.*;
 
 @Repository("fake")
 public class FakeUserApplicationDaoService implements ApplicationUserDao {

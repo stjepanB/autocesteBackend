@@ -2,9 +2,9 @@ package diplomski.autoceste.model;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Entity
 public class User {
+
 
     @Id
     @GeneratedValue
@@ -16,6 +16,18 @@ public class User {
     private String address;
     @Column(nullable = false, unique = true)
     private String emailAddress;
+    @Column(nullable = false)
+    private String role;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private  boolean isAccountNonExpired;
+    @Column(nullable = false)
+    private  boolean isAccountNonLocked;
+    @Column(nullable = false)
+    private  boolean isCredentialsNonExpired;
+    @Column(nullable = false)
+    private  boolean isEnabled;
 
     @OneToMany
     private List<Invoice> invoices;
@@ -26,6 +38,46 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     public String getFirstName() {
@@ -74,5 +126,13 @@ public class User {
 
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

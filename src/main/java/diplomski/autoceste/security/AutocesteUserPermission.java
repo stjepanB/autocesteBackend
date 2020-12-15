@@ -1,6 +1,6 @@
 package diplomski.autoceste.security;
 
-public enum ApplicationUserPermission {
+public enum AutocesteUserPermission {
     USER_READ("user:read"),
     USER_WRITE("user:write"),
     ORGANIZATION_READ("organization:read"),
@@ -10,7 +10,7 @@ public enum ApplicationUserPermission {
 
     private final String permission;
 
-    ApplicationUserPermission(String permission) {
+    AutocesteUserPermission(String permission) {
         this.permission = permission;
     }
 

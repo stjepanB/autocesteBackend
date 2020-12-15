@@ -1,5 +1,6 @@
 package diplomski.autoceste.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,8 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-    private String allowedOrigin = "http://localhost:3000";
+    @Value( "${allowed.origin.address}" )
+    private String allowedOrigin;
 
     @Override
     public void doFilter(ServletRequest req,

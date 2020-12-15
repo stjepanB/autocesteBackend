@@ -7,12 +7,8 @@ import java.util.Collection;
 import java.util.Set;
 
 public class AutocesteUserDetails implements UserDetails {
-
-
-
-
-
-    private final Set<?extends GrantedAuthority> grantedAuthorities;
+    private Long id;
+    private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final String password;
     private final String email;
     private final boolean isAccountNonExpired;

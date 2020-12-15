@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class AutocesteUserDetailsService implements UserDetailsService {
 
+
+
     private AutocesteUserDetailsDao autocesteUserDetailsDao;
 
     @Autowired
