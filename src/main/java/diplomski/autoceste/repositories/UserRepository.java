@@ -1,9 +1,9 @@
 package diplomski.autoceste.repositories;
 
-import diplomski.autoceste.model.User;
+import diplomski.autoceste.model.PrivateUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository  extends JpaRepository<User,Long> {
+public interface UserRepository  extends JpaRepository<PrivateUser,Long> {
 
-    User findByEmail(String email);
+    PrivateUser findByEmail(String email);
 }

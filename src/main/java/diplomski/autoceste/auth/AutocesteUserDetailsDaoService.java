@@ -1,6 +1,6 @@
 package diplomski.autoceste.auth;
 
-import diplomski.autoceste.model.User;
+import diplomski.autoceste.model.PrivateUser;
 import diplomski.autoceste.repositories.UserRepository;
 import diplomski.autoceste.security.AutocesteUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +21,19 @@ public class AutocesteUserDetailsDaoService implements AutocesteUserDetailsDao {
     @Override
     public Optional<AutocesteUserDetails> selectApplicationUserByEmail(String email) {
 
-        User user = repository.findByEmail(email);
+        PrivateUser privateUser = repository.findByEmail(email);
         AutocesteUserDetails userDetails = null;
 
-        if (user != null) {
-            AutocesteUserRole role = AutocesteUserRole.valueOf(user.getRole());
+        if (privateUser != null) {
+            AutocesteUserRole role = AutocesteUserRole.valueOf(privateUser.getRole());
             userDetails = new AutocesteUserDetails(
                     role.getGrauntedAuthorities(),
-                    user.getPassword(),
-                    user.getEmailAddress(),
-                    user.isAccountNonExpired(),
-                    user.isAccountNonLocked(),
-                    user.isCredentialsNonExpired(),
-                    user.isEnabled());
+                    privateUser.getPassword(),
+                    privateUser.getEmail(),
+                    privateUser.isAccountNonExpired(),
+                    privateUser.isAccountNonLocked(),
+                    privateUser.isCredentialsNonExpired(),
+                    privateUser.isEnabled());
         }
 
 

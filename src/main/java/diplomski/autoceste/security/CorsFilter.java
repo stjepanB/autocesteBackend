@@ -14,8 +14,8 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-    @Value( "${allowed.origin.address}" )
-    private String allowedOrigin;
+    //@Value( "${allowed.origin.address}" )
+    private String allowedOrigin = "http://localhost:3000";
 
     @Override
     public void doFilter(ServletRequest req,

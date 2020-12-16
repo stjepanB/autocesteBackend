@@ -3,19 +3,22 @@ package diplomski.autoceste.model;
 import javax.persistence.*;
 import java.util.List;
 @Entity
-public class User {
+public class PrivateUser {
 
 
     @Id
     @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
     @Column(nullable = false, unique = true)
     private Long oib;
+    @Column(nullable = false)
     private String address;
     @Column(nullable = false, unique = true)
-    private String emailAddress;
+    private String email;
     @Column(nullable = false)
     private String role;
     @Column(nullable = false)
@@ -28,6 +31,8 @@ public class User {
     private  boolean isCredentialsNonExpired;
     @Column(nullable = false)
     private  boolean isEnabled;
+    @Column(nullable = false)
+    private boolean isInvalid;
 
     @OneToMany
     private List<Invoice> invoices;
@@ -112,12 +117,12 @@ public class User {
         this.address = address;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Invoice> getInvoices() {
@@ -134,5 +139,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isInvalid() {
+        return isInvalid;
+    }
+
+    public void setInvalid(boolean invalid) {
+        isInvalid = invalid;
     }
 }
