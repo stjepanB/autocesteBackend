@@ -1,4 +1,4 @@
-package diplomski.autoceste.auth;
+package diplomski.autoceste.auth.tutorial;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static diplomski.autoceste.security.ApplicationUserRole.*;
+import static diplomski.autoceste.security.tutorial.ApplicationUserRole.*;
 
 @Repository("fake")
 public class FakeUserApplicationDaoService implements ApplicationUserDao {

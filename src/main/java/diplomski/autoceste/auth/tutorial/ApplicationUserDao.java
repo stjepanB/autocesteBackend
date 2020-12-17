@@ -1,4 +1,4 @@
-package diplomski.autoceste.auth;
+package diplomski.autoceste.auth.tutorial;
 
 import java.util.Optional;
 

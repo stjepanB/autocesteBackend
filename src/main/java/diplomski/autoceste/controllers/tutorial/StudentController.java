@@ -1,4 +1,4 @@
-package diplomski.autoceste.controllers;
+package diplomski.autoceste.controllers.tutorial;
 
 
 import diplomski.autoceste.model.Student;

@@ -1,4 +1,4 @@
-package diplomski.autoceste.security;
+package diplomski.autoceste.security.tutorial;
 
 import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static diplomski.autoceste.security.ApplicationUserPermission.*;
+import static diplomski.autoceste.security.tutorial.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
     ADMIN(Sets.newHashSet(ADMIN_READ, ADMIN_WRITE, USER_READ, USER_WRITE, ORGANIZATION_READ, ORGANIZATION_WRITE)),
@@ -27,7 +27,7 @@ public enum ApplicationUserRole {
         Set<SimpleGrantedAuthority> permissions = getPermissions().stream()
                 .map(p -> new SimpleGrantedAuthority(p.getPermission()))
                 .collect(Collectors.toSet());
-        permissions.add(new SimpleGrantedAuthority("ROLE_" +this.name()));
+        permissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
         return permissions;
     }
 }

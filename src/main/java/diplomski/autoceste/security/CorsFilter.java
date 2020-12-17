@@ -13,13 +13,14 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
+    //@Value( "${allowed.origin.address}" )
     private String allowedOrigin = "http://localhost:3000";
 
     @Override
     public void doFilter(ServletRequest req,
                          ServletResponse resp,
                          FilterChain chain) throws IOException, ServletException {
-
+        System.out.println("Usao sam tu gdje treba " + allowedOrigin);
         HttpServletResponse response = (HttpServletResponse) resp;
         response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
         response.setHeader("Access-Control-Allow-Methods", "PATCH,POST,GET,OPTIONS,DELETE,PUT");
@@ -31,10 +32,11 @@ public class CorsFilter implements Filter {
         response.setHeader("Access-Control-Expose-Headers", "Authorization, Uid");
 
         HttpServletRequest request = (HttpServletRequest) req;
-        if("OPTIONS".equalsIgnoreCase(request.getMethod())){
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
-        }else {
-            chain.doFilter(req,resp);
+        } else {
+            chain.doFilter(req, resp);
         }
     }
+
 }
