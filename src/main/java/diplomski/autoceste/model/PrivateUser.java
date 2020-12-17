@@ -37,6 +37,9 @@ public class PrivateUser {
     @OneToMany
     private List<Invoice> invoices;
 
+    @OneToMany
+    private List<Vehicle> vehicles;
+
     public Long getId() {
         return id;
     }

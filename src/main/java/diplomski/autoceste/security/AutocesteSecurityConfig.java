@@ -1,7 +1,6 @@
 package diplomski.autoceste.security;
 
 import diplomski.autoceste.auth.AutocesteUserDetailsService;
-import diplomski.autoceste.auth.tutorial.ApplicationUserService;
 import diplomski.autoceste.jwt.JwtConfig;
 import diplomski.autoceste.jwt.JwtTokenVerifier;
 import diplomski.autoceste.jwt.JwtUsernameAndPasswordAuthenticationFilter;
@@ -18,8 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.crypto.SecretKey;
-
-import static diplomski.autoceste.security.tutorial.ApplicationUserRole.USER;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +41,7 @@ public class AutocesteSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(),jwtConfig,secretKey))
+                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/register")
@@ -58,7 +55,6 @@ public class AutocesteSecurityConfig extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         return userService;
     }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

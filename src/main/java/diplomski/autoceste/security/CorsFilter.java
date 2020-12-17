@@ -1,6 +1,5 @@
 package diplomski.autoceste.security;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,7 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest req,
                          ServletResponse resp,
                          FilterChain chain) throws IOException, ServletException {
-
+        System.out.println("Usao sam tu gdje treba " + allowedOrigin);
         HttpServletResponse response = (HttpServletResponse) resp;
         response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
         response.setHeader("Access-Control-Allow-Methods", "PATCH,POST,GET,OPTIONS,DELETE,PUT");
@@ -33,10 +32,11 @@ public class CorsFilter implements Filter {
         response.setHeader("Access-Control-Expose-Headers", "Authorization, Uid");
 
         HttpServletRequest request = (HttpServletRequest) req;
-        if("OPTIONS".equalsIgnoreCase(request.getMethod())){
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
-        }else {
-            chain.doFilter(req,resp);
+        } else {
+            chain.doFilter(req, resp);
         }
     }
+
 }
