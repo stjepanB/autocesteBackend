@@ -1,6 +1,6 @@
 package diplomski.autoceste.auth;
 
-import diplomski.autoceste.model.PrivateUser;
+import diplomski.autoceste.models.PrivateUser;
 import diplomski.autoceste.repositories.UserRepository;
 import diplomski.autoceste.security.AutocesteUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
