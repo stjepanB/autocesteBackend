@@ -45,4 +45,10 @@ public class PrivateUserServiceImpl implements PrivateUserService {
 
         return true;
     }
+
+    @Override
+    public Long getPrivateUserIdByEmail(String email) {
+        PrivateUser user = repository.findByEmail(email);
+        return user.getId();
+    }
 }
