@@ -42,8 +42,9 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        String token = authorizationHeader.replace(jwtConfig.getTokenPrefix(), ""); // removing Bearer from token
 
+        String token = authorizationHeader.replace(jwtConfig.getTokenPrefix(), ""); // removing Bearer from token
+        System.out.println(token);
         try {
 
             Jws<Claims> claimsJwts = Jwts.parserBuilder()

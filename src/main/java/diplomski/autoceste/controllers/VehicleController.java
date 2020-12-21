@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RestController(value = "/vehicle")
+@RestController()
 public class VehicleController {
 
     private VehicleService vehicleService;
@@ -28,7 +28,7 @@ public class VehicleController {
         this.jwtService = jwtService;
     }
 
-    @PostMapping("/register")
+    @PostMapping(value = "/vehicle")
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ORGANIZATION')")
     public HttpStatus registerVehicle(@RequestHeader Map<String, String> headers, @RequestBody VehicleDto dto) {
         String token = headers.get("Authorization");

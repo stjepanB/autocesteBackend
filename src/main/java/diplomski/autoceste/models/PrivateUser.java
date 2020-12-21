@@ -3,7 +3,6 @@ package diplomski.autoceste.models;
 import diplomski.autoceste.validators.OibConstraints;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.List;
 @Entity
 public class PrivateUser {
@@ -21,7 +20,6 @@ public class PrivateUser {
     private Long oib;
     @Column(nullable = false)
     private String address;
-    @Email
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
