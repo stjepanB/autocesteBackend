@@ -89,4 +89,12 @@ public class Vehicle {
     public void setHeight(Integer height) {
         this.height = height;
     }
+
+    public PrivateUser getPrivateUser() {
+        return privateUser;
+    }
+
+    public void setPrivateUser(PrivateUser privateUser) {
+        this.privateUser = privateUser;
+    }
 }
