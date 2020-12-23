@@ -26,7 +26,7 @@ public class AutocesteUserDetailsDaoService implements AutocesteUserDetailsDao {
 
         if (privateUser != null) {
             AutocesteUserRole role = AutocesteUserRole.valueOf(privateUser.getRole());
-            System.out.println(role.getGrauntedAuthorities());
+
             userDetails = new AutocesteUserDetails(
                     role.getGrauntedAuthorities(),
                     privateUser.getPassword(),
@@ -36,7 +36,6 @@ public class AutocesteUserDetailsDaoService implements AutocesteUserDetailsDao {
                     privateUser.isCredentialsNonExpired(),
                     privateUser.isEnabled());
         }
-
 
         return userDetails == null ? Optional.empty() : Optional.of(userDetails);
     }

@@ -51,4 +51,9 @@ public class PrivateUserServiceImpl implements PrivateUserService {
         PrivateUser user = repository.findByEmail(email);
         return user.getId();
     }
+
+    @Override
+    public PrivateUser getPrivateUserByEmail(String email) {
+        return repository.findByEmail(email);
+    }
 }

@@ -1,12 +1,16 @@
 package diplomski.autoceste.services;
 
 import diplomski.autoceste.forms.VehicleDto;
+import diplomski.autoceste.models.PrivateUser;
 import diplomski.autoceste.models.Vehicle;
 import diplomski.autoceste.models.VehicleCategory;
 import diplomski.autoceste.repositories.UserRepository;
 import diplomski.autoceste.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -33,6 +37,17 @@ public class VehicleServiceImpl implements VehicleService {
         v.setPlate(dto.getPlate());
         v.setPrivateUser(userRepository.findById(dto.getUserId()).get());
 
-        return repository.save(v).getId() != null;
+        try {
+            repository.save(v);
+        } catch (DataIntegrityViolationException e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public List<Vehicle> getVehiclesForPrivateUser(PrivateUser privateUser) {
+        List<Vehicle> vehicles = repository.findAllByPrivateUser(privateUser);
+        return vehicles;
     }
 }
