@@ -1,4 +1,6 @@
-package diplomski.autoceste.model;
+package diplomski.autoceste.models;
+
+import diplomski.autoceste.validators.OibConstraints;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +16,7 @@ public class PrivateUser {
     @Column(nullable = false)
     private String lastName;
     @Column(nullable = false, unique = true)
+    @OibConstraints
     private Long oib;
     @Column(nullable = false)
     private String address;
@@ -150,5 +153,13 @@ public class PrivateUser {
 
     public void setInvalid(boolean invalid) {
         isInvalid = invalid;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 }

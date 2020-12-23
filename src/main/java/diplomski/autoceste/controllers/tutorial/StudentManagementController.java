@@ -1,6 +1,6 @@
 package diplomski.autoceste.controllers.tutorial;
 
-import diplomski.autoceste.model.Student;
+import diplomski.autoceste.models.tutorial.Student;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package diplomski.autoceste.controllers.tutorial;
 
 
-import diplomski.autoceste.model.Student;
+import diplomski.autoceste.models.tutorial.Student;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

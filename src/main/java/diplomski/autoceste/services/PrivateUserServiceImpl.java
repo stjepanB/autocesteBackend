@@ -1,7 +1,7 @@
-package diplomski.autoceste.service;
+package diplomski.autoceste.services;
 
-import diplomski.autoceste.formsData.RegisterPrivateUserDto;
-import diplomski.autoceste.model.PrivateUser;
+import diplomski.autoceste.forms.RegisterPrivateUserDto;
+import diplomski.autoceste.models.PrivateUser;
 import diplomski.autoceste.repositories.UserRepository;
 import diplomski.autoceste.security.AutocesteUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PrivateUserRegistrationService {
+public class PrivateUserServiceImpl implements PrivateUserService {
 
     private UserRepository repository;
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    public PrivateUserRegistrationService(UserRepository repository, PasswordEncoder passwordEncoder) {
+    public PrivateUserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -38,11 +38,22 @@ public class PrivateUserRegistrationService {
         privateUser.setOib(dto.getOib());
 
         try {
-            repository.saveAndFlush(privateUser);
+            repository.save(privateUser);
         }catch (DataIntegrityViolationException e){
             return false;
         }
 
         return true;
+    }
+
+    @Override
+    public Long getPrivateUserIdByEmail(String email) {
+        PrivateUser user = repository.findByEmail(email);
+        return user.getId();
+    }
+
+    @Override
+    public PrivateUser getPrivateUserByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }

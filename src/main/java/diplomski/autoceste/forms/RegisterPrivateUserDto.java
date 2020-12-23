@@ -1,4 +1,4 @@
-package diplomski.autoceste.formsData;
+package diplomski.autoceste.forms;
 
 public class RegisterPrivateUserDto {
 

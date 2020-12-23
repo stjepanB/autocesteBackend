@@ -1,4 +1,4 @@
-package diplomski.autoceste.model;
+package diplomski.autoceste.models.tutorial;
 
 
 import javax.persistence.Entity;

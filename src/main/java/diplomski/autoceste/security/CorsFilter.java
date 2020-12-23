@@ -20,7 +20,6 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest req,
                          ServletResponse resp,
                          FilterChain chain) throws IOException, ServletException {
-        System.out.println("Usao sam tu gdje treba " + allowedOrigin);
         HttpServletResponse response = (HttpServletResponse) resp;
         response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
         response.setHeader("Access-Control-Allow-Methods", "PATCH,POST,GET,OPTIONS,DELETE,PUT");
