@@ -37,13 +37,13 @@ public class AutocesteApplication {
             user1.setAddress("Prvomajska 1 ");
             user1.setOib(74060539451L);
 
-            user2.setRole(AutocesteUserRole.USER.name());
+            user2.setRole(AutocesteUserRole.ADMIN.name());
             user2.setAccountNonExpired(true);
             user2.setEnabled(true);
             user2.setAccountNonLocked(true);
             user2.setCredentialsNonExpired(true);
             user2.setPassword(passwordEncoder.encode("pass"));
-            user2.setEmail("mijomir@firma.com");
+            user2.setEmail("admin@autocesta.com");
             user2.setFirstName("Mijomir");
             user2.setLastName("Bubalo");
             user2.setInvalid(false);
