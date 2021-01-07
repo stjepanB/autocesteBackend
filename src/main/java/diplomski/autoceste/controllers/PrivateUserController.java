@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = {"${allowed.origin.address}", "http://www.nekaMojaStranica.com"})
 public class PrivateUserController {
 
     private final PrivateUserServiceImpl service;
