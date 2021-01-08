@@ -1,12 +1,16 @@
 package diplomski.autoceste.controllers;
 
 import diplomski.autoceste.forms.highwaySections.HighwaySectionDto;
+import diplomski.autoceste.models.HighwaySection;
 import diplomski.autoceste.services.HighwaySectionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -31,5 +35,16 @@ public class HighwaySectionController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.of(Optional.ofNullable(sections));
+    }
+
+    @PostMapping(value = "/sections")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public HttpStatus setHighwaySections(@RequestBody List<HighwaySectionDto> dto) {
+
+        List<HighwaySection> sections = dto.stream()
+                .map(HighwaySectionDto::toHighwaySections)
+                .collect(Collectors.toList());
+
+        return highwaySectionService.addHighwaySections(sections) ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
     }
 }

@@ -20,7 +20,6 @@ public class Vehicle {
     private Integer maxWeightWithCargo;
     private Integer height;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "private_user_id")
     @JsonIgnore
