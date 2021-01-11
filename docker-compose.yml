@@ -8,7 +8,6 @@ services:
       - "18080:9000"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/autocesteBazaPodataka
-      - ALLOWED_ORIGIN_ADDRESS="http://localhost:3000"
     depends_on:
       db:
         condition: service_healthy
@@ -27,3 +26,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 30
+
+  frontend:
+    image: "autocestefrontend_frontend"
+    container_name: "autoceste_frontend"
+    ports:
+      - "80:80"
+    depends_on:
+      - app
