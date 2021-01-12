@@ -36,6 +36,7 @@ public class VehicleServiceImpl implements VehicleService {
         v.setMaxWeightWithCargo(dto.getMaxWeight());
         v.setPlate(dto.getPlate());
         v.setPrivateUser(userRepository.findById(dto.getUserId()).get());
+        v.setHasGreenCertificate(dto.getCertificate());
 
         try {
             repository.save(v);

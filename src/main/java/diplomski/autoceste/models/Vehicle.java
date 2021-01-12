@@ -19,6 +19,7 @@ public class Vehicle {
     private String type;
     private Integer maxWeightWithCargo;
     private Integer height;
+    private Boolean hasGreenCertificate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "private_user_id")
@@ -95,5 +96,13 @@ public class Vehicle {
 
     public void setPrivateUser(PrivateUser privateUser) {
         this.privateUser = privateUser;
+    }
+
+    public Boolean getHasGreenCertificate() {
+        return hasGreenCertificate;
+    }
+
+    public void setHasGreenCertificate(Boolean hasGreenCertificate) {
+        this.hasGreenCertificate = hasGreenCertificate;
     }
 }

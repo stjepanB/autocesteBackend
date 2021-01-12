@@ -31,6 +31,6 @@ services:
     image: "autocestefrontend_frontend"
     container_name: "autoceste_frontend"
     ports:
-      - "80:80"
+      - "3080:80"
     depends_on:
       - app
