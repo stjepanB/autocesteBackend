@@ -1,6 +1,7 @@
 package diplomski.autoceste.controllers;
 
 import diplomski.autoceste.forms.VehicleDto;
+import diplomski.autoceste.forms.VehicleParameterDto;
 import diplomski.autoceste.models.PrivateUser;
 import diplomski.autoceste.models.Vehicle;
 import diplomski.autoceste.services.PrivateUserService;
@@ -54,5 +55,11 @@ public class VehicleController {
         }
 
         return ResponseEntity.of(Optional.ofNullable(vehicles));
+    }
+
+    @GetMapping(value = "/vehicle/params")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<List<VehicleParameterDto>> getVehicleParams() {
+        return ResponseEntity.of(Optional.of(vehicleService.getVehicleParams()));
     }
 }
