@@ -16,7 +16,7 @@ public class VehicleDiscountLabel {
     @Column(nullable = false)
     private VehicleCategory category;
     @Column(nullable = false)
-    private VehicleParametersLabel parametersLabel;
+    private String parametersLabel;
     private ParameterOperation operation;
     private Double value;
 
@@ -44,11 +44,11 @@ public class VehicleDiscountLabel {
         this.category = category;
     }
 
-    public VehicleParametersLabel getParametersLabel() {
+    public String getParametersLabel() {
         return parametersLabel;
     }
 
-    public void setParametersLabel(VehicleParametersLabel parametersLabel) {
+    public void setParametersLabel(String parametersLabel) {
         this.parametersLabel = parametersLabel;
     }
 
