@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @RestController
 public class DiscountController {
 
@@ -36,11 +37,11 @@ public class DiscountController {
         return HttpStatus.BAD_REQUEST;
     }
 
-
-    @GetMapping(value = "/discount/labels")
+    @GetMapping(value = "/discount/label")
     public ResponseEntity<List<VehicleDiscountLabelDto>> getDiscountLabels() {
 
         List<VehicleDiscountLabel> retreived = discountService.getAllVehicleDiscountLabel();
+        System.out.println(retreived);
 
         return ResponseEntity.of(Optional.of(
                 retreived.stream()

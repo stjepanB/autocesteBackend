@@ -18,7 +18,7 @@ public class VehicleDiscountLabelDto {
     public VehicleDiscountLabelDto(VehicleDiscountLabel discountLabel) {
         this.name = discountLabel.getName();
         this.operation = discountLabel.getOperation().toString();
-        this.value = discountLabel.getValue().toString();
+        this.value = discountLabel.getValue() == null ? null : discountLabel.getValue().toString();
         this.paramType = discountLabel.getParametersLabel();
         this.vehicleCategory = discountLabel.getCategory().toString();
     }
