@@ -1,11 +1,13 @@
 package diplomski.autoceste.controllers;
 
+import diplomski.autoceste.forms.DiscountDto;
 import diplomski.autoceste.forms.VehicleDiscountLabelDto;
 import diplomski.autoceste.models.VehicleDiscountLabel;
 import diplomski.autoceste.services.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +43,6 @@ public class DiscountController {
     public ResponseEntity<List<VehicleDiscountLabelDto>> getDiscountLabels() {
 
         List<VehicleDiscountLabel> retreived = discountService.getAllVehicleDiscountLabel();
-        System.out.println(retreived);
 
         return ResponseEntity.of(Optional.of(
                 retreived.stream()
@@ -49,4 +50,15 @@ public class DiscountController {
                         .collect(Collectors.toList())));
     }
 
+    @PostMapping(value = "/discount")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public HttpStatus setDiscount(@RequestBody DiscountDto dto) {
+        return discountService.addDiscount(dto) ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+    }
+
+    @GetMapping(value = "/discount")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<List<DiscountDto>> getDiscounts() {
+        return ResponseEntity.of(Optional.of(discountService.getDiscounts()));
+    }
 }
