@@ -1,6 +1,7 @@
 package diplomski.autoceste.controllers;
 
 import diplomski.autoceste.forms.VehicleDto;
+import diplomski.autoceste.forms.VehicleParameterDto;
 import diplomski.autoceste.models.PrivateUser;
 import diplomski.autoceste.models.Vehicle;
 import diplomski.autoceste.services.PrivateUserService;
@@ -10,15 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController()
+@RestController
+@CrossOrigin
 public class VehicleController {
 
     private VehicleService vehicleService;
@@ -56,5 +55,11 @@ public class VehicleController {
         }
 
         return ResponseEntity.of(Optional.ofNullable(vehicles));
+    }
+
+    @GetMapping(value = "/vehicle/params")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<List<VehicleParameterDto>> getVehicleParams() {
+        return ResponseEntity.of(Optional.of(vehicleService.getVehicleParams()));
     }
 }

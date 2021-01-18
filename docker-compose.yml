@@ -1,7 +1,7 @@
 services:
   app:
     build:
-      context:  .
+      context: .
       dockerfile: Dockerfile
     container_name: autoceste_backend
     ports:
@@ -22,7 +22,15 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=autocesteBazaPodataka
     healthcheck:
-      test: ["CMD" , "pg_isready", "-U", "postgres"]
+      test: [ "CMD" , "pg_isready", "-U", "postgres" ]
       interval: 5s
       timeout: 5s
       retries: 30
+
+  frontend:
+    image: "autocestefrontend_frontend"
+    container_name: "autoceste_frontend"
+    ports:
+      - "3080:80"
+    depends_on:
+      - app

@@ -25,8 +25,8 @@ public class AutocesteSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
     private final AutocesteUserDetailsService userService;
-    private SecretKey secretKey;
-    private JwtConfig jwtConfig;
+    private final SecretKey secretKey;
+    private final JwtConfig jwtConfig;
 
     public AutocesteSecurityConfig(PasswordEncoder passwordEncoder, AutocesteUserDetailsService userService, SecretKey secretKey, JwtConfig jwtConfig) {
         this.passwordEncoder = passwordEncoder;
@@ -57,7 +57,7 @@ public class AutocesteSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 

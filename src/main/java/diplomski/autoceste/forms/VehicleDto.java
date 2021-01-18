@@ -10,6 +10,15 @@ public class VehicleDto {
     private int maxWeight;
     private int height;
     private long userId;
+    private Boolean certificate;
+
+    public Boolean getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(Boolean certificate) {
+        this.certificate = certificate;
+    }
 
     public String getPlate() {
         return plate;
