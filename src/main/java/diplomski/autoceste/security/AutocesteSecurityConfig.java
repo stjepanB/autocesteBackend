@@ -44,7 +44,7 @@ public class AutocesteSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/register")
+                .antMatchers("/register", "/service/billing", "/service/sections")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

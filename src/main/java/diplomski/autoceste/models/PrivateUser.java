@@ -4,6 +4,8 @@ import diplomski.autoceste.validators.OibConstraints;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 public class PrivateUser {
 
@@ -42,6 +44,9 @@ public class PrivateUser {
 
     @OneToMany
     private List<Vehicle> vehicles;
+
+    @OneToMany(mappedBy="privateUser")
+    private Set<PrivateUserBill> bills;
 
     public Long getId() {
         return id;

@@ -2,7 +2,7 @@ package diplomski.autoceste.services;
 
 import diplomski.autoceste.forms.RegisterPrivateUserDto;
 import diplomski.autoceste.models.PrivateUser;
-import diplomski.autoceste.repositories.UserRepository;
+import diplomski.autoceste.repositories.PrivateUserRepository;
 import diplomski.autoceste.security.AutocesteUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrivateUserServiceImpl implements PrivateUserService {
 
-    private UserRepository repository;
+    private PrivateUserRepository repository;
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    public PrivateUserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
+    public PrivateUserServiceImpl(PrivateUserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }

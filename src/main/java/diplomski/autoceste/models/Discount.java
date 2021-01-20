@@ -2,9 +2,7 @@ package diplomski.autoceste.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -22,6 +20,9 @@ public class Discount {
     @Column(nullable = false)
     private Float percentage;
 
+    @ManyToMany(mappedBy = "discounts")
+    private Set<PrivateUserBill> bills = new HashSet<>();
+
     @ElementCollection
     private Map<String, String> labels;
 
@@ -31,6 +32,18 @@ public class Discount {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<PrivateUserBill> getBills() {
+        return bills;
+    }
+
+    public void setBills(Set<PrivateUserBill> bills) {
+        this.bills = bills;
+    }
+
+    public void setLabels(Map<String, String> labels) {
+        this.labels = labels;
     }
 
     public String getName() {

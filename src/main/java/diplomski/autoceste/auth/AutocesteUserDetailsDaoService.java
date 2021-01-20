@@ -1,7 +1,7 @@
 package diplomski.autoceste.auth;
 
 import diplomski.autoceste.models.PrivateUser;
-import diplomski.autoceste.repositories.UserRepository;
+import diplomski.autoceste.repositories.PrivateUserRepository;
 import diplomski.autoceste.security.AutocesteUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class AutocesteUserDetailsDaoService implements AutocesteUserDetailsDao {
 
-    private final UserRepository repository;
+    private final PrivateUserRepository repository;
 
     @Autowired
-    public AutocesteUserDetailsDaoService(UserRepository repository) {
+    public AutocesteUserDetailsDaoService(PrivateUserRepository repository) {
         this.repository = repository;
     }
 

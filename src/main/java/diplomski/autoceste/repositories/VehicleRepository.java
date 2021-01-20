@@ -14,4 +14,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query(value = "SELECT column_name, data_type FROM information_schema.columns " +
             "WHERE  table_name = 'vehicle' \n", nativeQuery = true)
     List<Object[]> getColumnsWithTypes();
+
+    Vehicle findByPlate(String plate);
 }

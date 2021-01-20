@@ -1,7 +1,7 @@
 package diplomski.autoceste.populators;
 
 import diplomski.autoceste.models.PrivateUser;
-import diplomski.autoceste.repositories.UserRepository;
+import diplomski.autoceste.repositories.PrivateUserRepository;
 import diplomski.autoceste.security.AutocesteUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 public class PrivateUserPopulate {
 
     PasswordEncoder passwordEncoder;
-    UserRepository userRepository;
+    PrivateUserRepository privateUserRepository;
 
     @Autowired
-    public PrivateUserPopulate(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public PrivateUserPopulate(PasswordEncoder passwordEncoder, PrivateUserRepository privateUserRepository) {
         this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
+        this.privateUserRepository = privateUserRepository;
     }
 
     public void populate(){
@@ -49,8 +49,8 @@ public class PrivateUserPopulate {
         user2.setAddress("Zdenci 1 ");
         user2.setOib(92249397606L);
 
-        userRepository.save(user1);
-        userRepository.save(user2);
+        privateUserRepository.save(user1);
+        privateUserRepository.save(user2);
     }
 
 }
