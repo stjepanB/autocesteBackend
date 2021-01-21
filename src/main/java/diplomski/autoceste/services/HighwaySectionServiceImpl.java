@@ -34,7 +34,6 @@ public class HighwaySectionServiceImpl implements HighwaySectionService {
 
     @Override
     public boolean addHighwaySections(List<HighwaySection> sections) {
-
         try {
             repository.saveAll(sections);
         } catch (DataIntegrityViolationException e) {

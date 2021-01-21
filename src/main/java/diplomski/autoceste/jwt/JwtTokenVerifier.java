@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 
 public class JwtTokenVerifier extends OncePerRequestFilter {
 
-    private SecretKey secretKey;
-    private JwtConfig jwtConfig;
+    private final SecretKey secretKey;
+    private final JwtConfig jwtConfig;
 
     public JwtTokenVerifier(SecretKey secretKey, JwtConfig jwtConfig) {
         this.secretKey = secretKey;
