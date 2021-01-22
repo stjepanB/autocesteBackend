@@ -7,7 +7,7 @@ import java.util.List;
 public interface HighwaySectionService {
     List<HighwaySection> getHighwaySections();
 
-    List<HighwaySection> getHighwaySections(String start, String end);
+    List<HighwaySection> getHighwaySections(List<String> locations);
 
     HighwaySection addHighwaySection(HighwaySection highwaySection);
 

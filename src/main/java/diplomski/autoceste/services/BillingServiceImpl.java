@@ -7,6 +7,7 @@ import diplomski.autoceste.models.PrivateUserBill;
 import diplomski.autoceste.models.VehicleCategory;
 import diplomski.autoceste.repositories.PrivateUserBillRepository;
 import diplomski.autoceste.repositories.VehicleRepository;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class BillingServiceImpl implements BillingService {
         b.setVehicle(vehicleRepository.findByPlate(dto.getPlateMark()));
         b.setDiscounts(discountService.findAllDiscountForVehicle(b.getVehicle()));
         b.setDiscounts(discountService.findAllDiscountForPrivateUser(b.getPrivateUser()));
-        b.setAmount(calculatePrice(sectionService.getHighwaySections(b.getLocationEntry(), b.getLocationExit()), b.getDiscounts(), b.getVehicle().getCategory()));
+        b.setAmount(calculatePrice(sectionService.getHighwaySections(dto.getLocations()), b.getDiscounts(), b.getVehicle().getCategory()));
         return b;
     }
 
@@ -72,5 +73,7 @@ public class BillingServiceImpl implements BillingService {
 
             }
         }
+
+        throw new NotYetImplementedException();
     }
 }

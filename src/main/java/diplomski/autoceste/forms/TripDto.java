@@ -2,6 +2,7 @@ package diplomski.autoceste.forms;
 
 import diplomski.autoceste.models.Direction;
 
+import java.util.List;
 import java.time.LocalDateTime;
 
 public class TripDto {
@@ -11,6 +12,7 @@ public class TripDto {
     private LocalDateTime recordedTimeExit;
     private String locationEntry;
     private String locationExit;
+    private List<String> locations;
     private Direction direction;
 
     public TripDto() {
@@ -62,5 +64,13 @@ public class TripDto {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public List<String> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
     }
 }

@@ -24,12 +24,10 @@ public class HighwaySectionServiceImpl implements HighwaySectionService {
     }
 
     @Override
-    public List<HighwaySection> getHighwaySections(String start, String end) {
+    public List<HighwaySection> getHighwaySections(List<String> locations) {
 
         List<HighwaySection> sections = repository.findAll();
 
-        int indexStart = sections.indexOf(sections.stream().filter(e-> e.getSectionStart().equals(start)).findFirst());
-        int indexEnd = sections.indexOf(sections.stream().filter(e-> e.getSectionStart().equals(end)).findFirst());
 
         List<HighwaySection> ret = new ArrayList<>();
 
