@@ -2,11 +2,11 @@ package diplomski.autoceste.services;
 
 import diplomski.autoceste.models.HighwaySection;
 import diplomski.autoceste.repositories.HighwaySectionRepository;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,9 +23,17 @@ public class HighwaySectionServiceImpl implements HighwaySectionService {
         return repository.findAll();
     }
 
-    public List<HighwaySection> getHighwaySections(HighwaySection start, HighwaySection end) {
-        //TODO
-        throw new NotYetImplementedException();
+    @Override
+    public List<HighwaySection> getHighwaySections(String start, String end) {
+
+        List<HighwaySection> sections = repository.findAll();
+
+        int indexStart = sections.indexOf(sections.stream().filter(e-> e.getSectionStart().equals(start)).findFirst());
+        int indexEnd = sections.indexOf(sections.stream().filter(e-> e.getSectionStart().equals(end)).findFirst());
+
+        List<HighwaySection> ret = new ArrayList<>();
+
+        return null;
     }
 
     public HighwaySection addHighwaySection(HighwaySection highwaySection) {

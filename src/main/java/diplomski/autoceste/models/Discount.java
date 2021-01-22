@@ -14,8 +14,10 @@ public class Discount {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private LocalDate startDate;
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private LocalDate endDate;
     @Column(nullable = false)
     private Float percentage;

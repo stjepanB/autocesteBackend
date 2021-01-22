@@ -105,4 +105,17 @@ public class Vehicle {
     public void setHasGreenCertificate(Boolean hasGreenCertificate) {
         this.hasGreenCertificate = hasGreenCertificate;
     }
+
+    public Object get(String paramName) {
+
+        return switch (paramName) {
+            case "color" -> color;
+            case "maxWeightWithCargo" -> maxWeightWithCargo;
+            case "type" -> type;
+            case "manufacturer" -> manufacturer;
+            case "height" -> height;
+            case "hasGreenCertificate" -> hasGreenCertificate;
+            default -> null;
+        };
+    }
 }

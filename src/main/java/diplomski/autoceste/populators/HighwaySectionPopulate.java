@@ -29,7 +29,6 @@ public class HighwaySectionPopulate {
 
     public void populate() throws IOException {
 
-
         Resource resource = resourceLoader.getResource("classpath:final.txt");
         InputStream inputStream = resource.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -39,7 +38,6 @@ public class HighwaySectionPopulate {
         while ((line = reader.readLine()) != null) {
             lines.add(line);
         }
-
 
         String sectionStart = "Lučko";
         for (String s : lines) {
@@ -54,6 +52,7 @@ public class HighwaySectionPopulate {
             String[] catII = tmp[3].split(",");
             String[] catIII = tmp[4].split(",");
             String[] catIV = tmp[5].split(",");
+            String distance = tmp[6];
 
             section.setInfrastructureCostIA(Double.parseDouble(catIA[0]));
             section.setOutsideCostIA(Double.parseDouble(catIA[1]));
@@ -70,6 +69,7 @@ public class HighwaySectionPopulate {
             section.setInfrastructureCostIV(Double.parseDouble(catIV[0]));
             section.setOutsideCostIV(Double.parseDouble(catIV[1]));
 
+            section.setDistance(Integer.parseInt(distance));
             service.addHighwaySection(section);
         }
     }

@@ -23,10 +23,16 @@ public class PrivateUserBill {
     private String locationExit;
     @Column(nullable = false)
     private Direction direction;
+    @Column(nullable = false)
+    private Double amount;
 
     @ManyToOne
     @JoinColumn(name = "private_user_id", nullable = false)
     private PrivateUser privateUser;
+
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -108,4 +114,19 @@ public class PrivateUserBill {
         this.privateUser = privateUser;
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 }

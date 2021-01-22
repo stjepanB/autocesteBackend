@@ -46,6 +46,9 @@ public class HighwaySection {
     @Column(nullable = false)
     @Nonnegative
     private Double outsideCostIV;
+    @Nonnegative
+    @Column(nullable = false)
+    private Integer distance;
 
     public Long getId() {
         return id;
@@ -149,5 +152,13 @@ public class HighwaySection {
 
     public void setOutsideCostIV(Double outsideCostIV) {
         this.outsideCostIV = outsideCostIV;
+    }
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
     }
 }
