@@ -32,7 +32,7 @@ public class DiscountServiceImpl implements DiscountService {
     public DiscountServiceImpl(VehicleDiscountLabelRepository vehicleDiscountLabelRepository, DiscountRepository discountRepository, NumberComparator comparator) {
         this.vehicleDiscountLabelRepository = vehicleDiscountLabelRepository;
         this.discountRepository = discountRepository;
-        this.activeDiscounts = discountRepository.findByStartDateLessThanAndEndDateGreaterThan(LocalDate.now());
+        this.activeDiscounts = discountRepository.findAll();
         this.comparator = comparator;
     }
 
@@ -50,7 +50,7 @@ public class DiscountServiceImpl implements DiscountService {
         return new HashSet<>();
     }
 
-    public HashSet findAllDiscountForVehicle(Vehicle vehicle) {
+    public HashSet<Discount> findAllDiscountForVehicle(Vehicle vehicle) {
 
         List<Discount> applyDiscounts = new ArrayList<>();
         for (Discount d : activeDiscounts) {
@@ -124,6 +124,6 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Scheduled(cron = "0 0 0 * * *")
     public void checkForNewDiscounts() {
-        this.activeDiscounts = discountRepository.findByStartDateLessThanAndEndDateGreaterThan(LocalDate.now());
+        this.activeDiscounts.addAll(discountRepository.findByStartDateLessThanAndEndDateGreaterThan(LocalDate.now(), LocalDate.now()));
     }
 }
