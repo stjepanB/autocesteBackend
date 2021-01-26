@@ -22,8 +22,6 @@ public class PrivateUserBill {
     @Column(nullable = false)
     private String locationExit;
     @Column(nullable = false)
-    private Direction direction;
-    @Column(nullable = false)
     private Double amount;
 
     @ManyToOne
@@ -96,14 +94,6 @@ public class PrivateUserBill {
 
     public void setLocationExit(String locationExit) {
         this.locationExit = locationExit;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 
     public PrivateUser getPrivateUser() {

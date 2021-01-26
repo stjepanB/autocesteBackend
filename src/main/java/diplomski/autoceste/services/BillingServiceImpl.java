@@ -6,8 +6,6 @@ import diplomski.autoceste.models.HighwaySection;
 import diplomski.autoceste.models.PrivateUserBill;
 import diplomski.autoceste.models.VehicleCategory;
 import diplomski.autoceste.repositories.PrivateUserBillRepository;
-import diplomski.autoceste.repositories.VehicleRepository;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -20,14 +18,17 @@ import java.util.stream.Collectors;
 public class BillingServiceImpl implements BillingService {
 
     private PrivateUserBillRepository repository;
-    private VehicleRepository vehicleRepository;
+    private ReportService reportService;
+    private VehicleService vehicleService;
     private DiscountService discountService;
     private HighwaySectionService sectionService;
 
     @Autowired
-    public BillingServiceImpl(PrivateUserBillRepository repository, VehicleRepository vehicleRepository, DiscountService discountService, HighwaySectionService sectionService) {
+    public BillingServiceImpl(PrivateUserBillRepository repository, ReportService reportService,
+                              VehicleService vehicleService, DiscountService discountService, HighwaySectionService sectionService) {
         this.repository = repository;
-        this.vehicleRepository = vehicleRepository;
+        this.reportService = reportService;
+        this.vehicleService = vehicleService;
         this.discountService = discountService;
         this.sectionService = sectionService;
     }
@@ -46,14 +47,25 @@ public class BillingServiceImpl implements BillingService {
 
     private PrivateUserBill tripToBill(TripDto dto) {
         PrivateUserBill b = new PrivateUserBill();
-        b.setDirection(dto.getDirection());
+        try {
+            b.setPrivateUser(vehicleService.findByPlate(dto.getPlateMark()).getPrivateUser());
+            b.setVehicle(vehicleService.findByPlate(dto.getPlateMark()));
+        } catch (NullPointerException e) {
+
+            boolean isSuccess = reportService.addReport(dto.getPlateMark(), dto.getRecordedTimeEntry(),
+                    dto.getRecordedTimeExit(), dto.getLocationEntry(), dto.getLocationExit());
+
+            if (isSuccess) {
+                throw new DataIntegrityViolationException("Illegal costumer");
+            }
+            throw new DataIntegrityViolationException("Illegal costumer, report save failed.");
+        }
+
         b.setLocationEntry(dto.getLocationEntry());
         b.setLocationExit(dto.getLocationExit());
         b.setPlateMark(dto.getPlateMark());
         b.setRecordedTimeEntry(dto.getRecordedTimeEntry());
         b.setRecordedTimeExit(dto.getRecordedTimeExit());
-        b.setPrivateUser(vehicleRepository.findByPlate(dto.getPlateMark()).getPrivateUser());
-        b.setVehicle(vehicleRepository.findByPlate(dto.getPlateMark()));
         b.setDiscounts(discountService.findAllDiscountForVehicle(b.getVehicle()));
         b.setDiscounts(discountService.findAllDiscountForPrivateUser(b.getPrivateUser()));
         b.setAmount(calculatePrice(sectionService.getHighwaySections(dto.getLocations()), b.getDiscounts(), b.getVehicle().getCategory()));
@@ -69,11 +81,28 @@ public class BillingServiceImpl implements BillingService {
         for (HighwaySection s : highwaySections) {
             switch (category) {
                 case I:
-                    amount += (s.getInfrastructureCostI() - totDiscount * s.getInfrastructureCostI() + s.getOutsideCostI()) * s.getDistance();
-
+                    amount += (s.getInfrastructureCostI() - totDiscount * s.getInfrastructureCostI() +
+                            s.getOutsideCostI()) * s.getDistance();
+                    break;
+                case IA:
+                    amount += (s.getInfrastructureCostIA() - totDiscount * s.getInfrastructureCostIA() +
+                            s.getOutsideCostIA()) * s.getDistance();
+                    break;
+                case II:
+                    amount += (s.getInfrastructureCostII() - totDiscount * s.getInfrastructureCostII() +
+                            s.getOutsideCostII()) * s.getDistance();
+                    break;
+                case III:
+                    amount += (s.getInfrastructureCostIII() - totDiscount * s.getInfrastructureCostIII() +
+                            s.getOutsideCostIII()) * s.getDistance();
+                    break;
+                case IV:
+                    amount += (s.getInfrastructureCostIV() - totDiscount * s.getInfrastructureCostIV() +
+                            s.getOutsideCostIV()) * s.getDistance();
+                    break;
             }
         }
 
-        throw new NotYetImplementedException();
+        return amount;
     }
 }

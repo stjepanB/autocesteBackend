@@ -2,6 +2,7 @@ package diplomski.autoceste;
 
 import diplomski.autoceste.populators.HighwaySectionPopulate;
 import diplomski.autoceste.populators.PrivateUserPopulate;
+import diplomski.autoceste.populators.VehiclePopulator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,10 +20,12 @@ public class AutocesteApplication {
     }
 
     @Bean
-    public CommandLineRunner run(PrivateUserPopulate privateUserPopulate, HighwaySectionPopulate sectionPopulate) throws Exception {
+    public CommandLineRunner run(PrivateUserPopulate privateUserPopulate, HighwaySectionPopulate sectionPopulate,
+                                 VehiclePopulator vehiclePopulator) throws Exception {
         return (String[] args) -> {
             privateUserPopulate.populate();
             sectionPopulate.populate();
+            vehiclePopulator.populate();
         };
     }
 

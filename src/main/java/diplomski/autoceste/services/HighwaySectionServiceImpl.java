@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HighwaySectionServiceImpl implements HighwaySectionService {
@@ -28,10 +28,7 @@ public class HighwaySectionServiceImpl implements HighwaySectionService {
 
         List<HighwaySection> sections = repository.findAll();
 
-
-        List<HighwaySection> ret = new ArrayList<>();
-
-        return null;
+        return sections.stream().filter(e -> locations.contains(e.getSectionStart())).collect(Collectors.toList());
     }
 
     public HighwaySection addHighwaySection(HighwaySection highwaySection) {

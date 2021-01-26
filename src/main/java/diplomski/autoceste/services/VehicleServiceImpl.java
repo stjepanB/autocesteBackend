@@ -64,4 +64,14 @@ public class VehicleServiceImpl implements VehicleService {
                 .map(VehicleParameterDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Vehicle findByPlate(String plate) {
+
+        Vehicle v = repository.findByPlate(plate);
+        if (v == null) {
+            throw new NullPointerException("Automobil nije registriran");
+        }
+        return v;
+    }
 }
