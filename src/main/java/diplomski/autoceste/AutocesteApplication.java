@@ -1,5 +1,6 @@
 package diplomski.autoceste;
 
+import diplomski.autoceste.populators.BillPopulate;
 import diplomski.autoceste.populators.HighwaySectionPopulate;
 import diplomski.autoceste.populators.PrivateUserPopulate;
 import diplomski.autoceste.populators.VehiclePopulator;
@@ -21,11 +22,12 @@ public class AutocesteApplication {
 
     @Bean
     public CommandLineRunner run(PrivateUserPopulate privateUserPopulate, HighwaySectionPopulate sectionPopulate,
-                                 VehiclePopulator vehiclePopulator) throws Exception {
+                                 VehiclePopulator vehiclePopulator, BillPopulate billPopulate) throws Exception {
         return (String[] args) -> {
             privateUserPopulate.populate();
             sectionPopulate.populate();
             vehiclePopulator.populate();
+            billPopulate.populate();
         };
     }
 

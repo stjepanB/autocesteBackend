@@ -1,10 +1,7 @@
 package diplomski.autoceste.services;
 
 import diplomski.autoceste.forms.TripDto;
-import diplomski.autoceste.models.Discount;
-import diplomski.autoceste.models.HighwaySection;
-import diplomski.autoceste.models.PrivateUserBill;
-import diplomski.autoceste.models.VehicleCategory;
+import diplomski.autoceste.models.*;
 import diplomski.autoceste.repositories.PrivateUserBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,15 +19,17 @@ public class BillingServiceImpl implements BillingService {
     private VehicleService vehicleService;
     private DiscountService discountService;
     private HighwaySectionService sectionService;
+    private PrivateUserService userService;
 
     @Autowired
     public BillingServiceImpl(PrivateUserBillRepository repository, ReportService reportService,
-                              VehicleService vehicleService, DiscountService discountService, HighwaySectionService sectionService) {
+                              VehicleService vehicleService, DiscountService discountService, HighwaySectionService sectionService, PrivateUserService userService) {
         this.repository = repository;
         this.reportService = reportService;
         this.vehicleService = vehicleService;
         this.discountService = discountService;
         this.sectionService = sectionService;
+        this.userService = userService;
     }
 
     public boolean createBills(List<TripDto> trips) {
@@ -43,6 +42,17 @@ public class BillingServiceImpl implements BillingService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<PrivateUserBill> findBillsByPrivateUserEmail(String email) {
+        PrivateUser user = userService.getPrivateUserByEmail(email);
+        return repository.findAllByPrivateUser(user);
+    }
+
+    @Override
+    public void addBill(PrivateUserBill bill) {
+        repository.save(bill);
     }
 
     private PrivateUserBill tripToBill(TripDto dto) {

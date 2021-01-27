@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -33,5 +34,10 @@ public class ReportServiceImpl implements ReportService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<Report> getReports() {
+        return repository.findAll();
     }
 }

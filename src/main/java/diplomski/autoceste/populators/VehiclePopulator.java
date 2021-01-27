@@ -3,29 +3,26 @@ package diplomski.autoceste.populators;
 import diplomski.autoceste.forms.VehicleDto;
 import diplomski.autoceste.models.PrivateUser;
 import diplomski.autoceste.models.VehicleCategory;
-import diplomski.autoceste.repositories.PrivateUserRepository;
+import diplomski.autoceste.services.PrivateUserService;
 import diplomski.autoceste.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class VehiclePopulator {
 
-    private PrivateUserRepository userRepository;
+    private PrivateUserService userService;
     private VehicleService service;
 
     @Autowired
-    public VehiclePopulator(PrivateUserRepository userRepository, VehicleService service) {
-        this.userRepository = userRepository;
+    public VehiclePopulator(PrivateUserService userService, VehicleService service) {
+        this.userService = userService;
         this.service = service;
     }
 
     public void populate() {
 
-        List<PrivateUser> users = userRepository.findAll();
-        PrivateUser user = users.stream().filter(e -> e.getEmail().equals("slavko@firma.com")).findFirst().get();
+        PrivateUser user = userService.getPrivateUserByEmail("slavko@firma.com");
         VehicleDto v = new VehicleDto();
         v.setPlate("ZG2222LL");
         v.setCertificate(true);

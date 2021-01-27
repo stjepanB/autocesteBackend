@@ -21,7 +21,7 @@ public class Vehicle {
     private Integer height;
     private Boolean hasGreenCertificate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "private_user_id")
     @JsonIgnore
     private PrivateUser privateUser;
