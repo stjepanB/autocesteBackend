@@ -2,12 +2,12 @@ package diplomski.autoceste.services;
 
 import diplomski.autoceste.models.HighwaySection;
 import diplomski.autoceste.repositories.HighwaySectionRepository;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HighwaySectionServiceImpl implements HighwaySectionService {
@@ -23,9 +23,12 @@ public class HighwaySectionServiceImpl implements HighwaySectionService {
         return repository.findAll();
     }
 
-    public List<HighwaySection> getHighwaySections(HighwaySection start, HighwaySection end) {
-        //TODO
-        throw new NotYetImplementedException();
+    @Override
+    public List<HighwaySection> getHighwaySections(List<String> locations) {
+
+        List<HighwaySection> sections = repository.findAll();
+
+        return sections.stream().filter(e -> locations.contains(e.getSectionStart())).collect(Collectors.toList());
     }
 
     public HighwaySection addHighwaySection(HighwaySection highwaySection) {
@@ -34,7 +37,6 @@ public class HighwaySectionServiceImpl implements HighwaySectionService {
 
     @Override
     public boolean addHighwaySections(List<HighwaySection> sections) {
-
         try {
             repository.saveAll(sections);
         } catch (DataIntegrityViolationException e) {
@@ -42,4 +44,5 @@ public class HighwaySectionServiceImpl implements HighwaySectionService {
         }
         return true;
     }
+
 }

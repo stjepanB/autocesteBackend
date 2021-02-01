@@ -21,7 +21,7 @@ public class Vehicle {
     private Integer height;
     private Boolean hasGreenCertificate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "private_user_id")
     @JsonIgnore
     private PrivateUser privateUser;
@@ -104,5 +104,18 @@ public class Vehicle {
 
     public void setHasGreenCertificate(Boolean hasGreenCertificate) {
         this.hasGreenCertificate = hasGreenCertificate;
+    }
+
+    public Object get(String paramName) {
+
+        return switch (paramName) {
+            case "color" -> color;
+            case "maxWeightWithCargo" -> maxWeightWithCargo;
+            case "type" -> type;
+            case "manufacturer" -> manufacturer;
+            case "height" -> height;
+            case "hasGreenCertificate" -> hasGreenCertificate;
+            default -> null;
+        };
     }
 }

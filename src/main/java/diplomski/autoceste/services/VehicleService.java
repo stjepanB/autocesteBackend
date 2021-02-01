@@ -14,4 +14,6 @@ public interface VehicleService {
     List<Vehicle> getVehiclesForPrivateUser(PrivateUser privateUser);
 
     List<VehicleParameterDto> getVehicleParams();
+
+    Vehicle findByPlate (String plate);
 }

@@ -35,6 +35,15 @@ public class HighwaySectionController {
         return ResponseEntity.of(Optional.ofNullable(sections));
     }
 
+    @GetMapping(value = "/service/sections", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<HighwaySectionDto>> getHighwaySectionsForSerivces() {
+        List<HighwaySectionDto> sections = highwaySectionService.getHighwaySections().stream()
+                .map(HighwaySectionDto::new)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.of(Optional.ofNullable(sections));
+    }
+
     @PostMapping(value = "/sections")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public HttpStatus setHighwaySections(@RequestBody List<HighwaySectionDto> dto) {
