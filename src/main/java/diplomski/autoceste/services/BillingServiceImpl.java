@@ -9,17 +9,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class BillingServiceImpl implements BillingService {
 
-    private PrivateUserBillRepository repository;
-    private ReportService reportService;
-    private VehicleService vehicleService;
-    private DiscountService discountService;
-    private HighwaySectionService sectionService;
-    private PrivateUserService userService;
+    private final PrivateUserBillRepository repository;
+    private final ReportService reportService;
+    private final VehicleService vehicleService;
+    private final DiscountService discountService;
+    private final HighwaySectionService sectionService;
+    private final PrivateUserService userService;
 
     @Autowired
     public BillingServiceImpl(PrivateUserBillRepository repository, ReportService reportService,
@@ -33,13 +32,13 @@ public class BillingServiceImpl implements BillingService {
     }
 
     public boolean createBills(List<TripDto> trips) {
-        try {
-            repository.saveAll(
-                    trips.stream()
-                            .map(this::tripToBill)
-                            .collect(Collectors.toList()));
-        } catch (DataIntegrityViolationException e) {
-            return false;
+
+        for (TripDto t : trips) {
+            try {
+                PrivateUserBill b = tripToBill(t);
+                repository.save(b);
+            } catch (DataIntegrityViolationException ignored) {
+            }
         }
         return true;
     }
@@ -90,26 +89,16 @@ public class BillingServiceImpl implements BillingService {
 
         for (HighwaySection s : highwaySections) {
             switch (category) {
-                case I:
-                    amount += (s.getInfrastructureCostI() - totDiscount * s.getInfrastructureCostI() +
-                            s.getOutsideCostI()) * s.getDistance();
-                    break;
-                case IA:
-                    amount += (s.getInfrastructureCostIA() - totDiscount * s.getInfrastructureCostIA() +
-                            s.getOutsideCostIA()) * s.getDistance();
-                    break;
-                case II:
-                    amount += (s.getInfrastructureCostII() - totDiscount * s.getInfrastructureCostII() +
-                            s.getOutsideCostII()) * s.getDistance();
-                    break;
-                case III:
-                    amount += (s.getInfrastructureCostIII() - totDiscount * s.getInfrastructureCostIII() +
-                            s.getOutsideCostIII()) * s.getDistance();
-                    break;
-                case IV:
-                    amount += (s.getInfrastructureCostIV() - totDiscount * s.getInfrastructureCostIV() +
-                            s.getOutsideCostIV()) * s.getDistance();
-                    break;
+                case I -> amount += (s.getInfrastructureCostI() - totDiscount * s.getInfrastructureCostI() +
+                        s.getOutsideCostI()) * s.getDistance();
+                case IA -> amount += (s.getInfrastructureCostIA() - totDiscount * s.getInfrastructureCostIA() +
+                        s.getOutsideCostIA()) * s.getDistance();
+                case II -> amount += (s.getInfrastructureCostII() - totDiscount * s.getInfrastructureCostII() +
+                        s.getOutsideCostII()) * s.getDistance();
+                case III -> amount += (s.getInfrastructureCostIII() - totDiscount * s.getInfrastructureCostIII() +
+                        s.getOutsideCostIII()) * s.getDistance();
+                case IV -> amount += (s.getInfrastructureCostIV() - totDiscount * s.getInfrastructureCostIV() +
+                        s.getOutsideCostIV()) * s.getDistance();
             }
         }
 
