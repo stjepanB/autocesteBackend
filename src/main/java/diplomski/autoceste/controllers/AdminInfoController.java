@@ -19,5 +19,4 @@ public class AdminInfoController {
         }
         return ResponseEntity.of(Optional.of(false));
     }
-
 }
