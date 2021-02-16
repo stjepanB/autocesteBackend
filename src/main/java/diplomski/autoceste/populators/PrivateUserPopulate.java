@@ -33,7 +33,7 @@ public class PrivateUserPopulate {
         user1.setLastName("Bekavac");
         user1.setInvalid(false);
         user1.setAddress("Prvomajska 1 ");
-        user1.setOib(74060539451L);
+        user1.setOib("74060539451");
 
         PrivateUser user2 = new PrivateUser();
         user2.setRole(AutocesteUserRole.ADMIN.name());
@@ -47,7 +47,7 @@ public class PrivateUserPopulate {
         user2.setLastName("Bubalo");
         user2.setInvalid(false);
         user2.setAddress("Zdenci 1 ");
-        user2.setOib(92249397606L);
+        user2.setOib("92249397606");
 
         privateUserRepository.save(user1);
         privateUserRepository.save(user2);

@@ -35,7 +35,7 @@ public class PrivateUserServiceImpl implements PrivateUserService {
         privateUser.setLastName(dto.getLastName());
         privateUser.setInvalid(dto.isInvalid());
         privateUser.setAddress(dto.getAddress());
-        privateUser.setOib(dto.getOib());
+        privateUser.setOib(dto.getOib().toString());
 
         try {
             repository.save(privateUser);

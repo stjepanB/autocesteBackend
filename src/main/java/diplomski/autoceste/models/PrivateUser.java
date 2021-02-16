@@ -19,7 +19,7 @@ public class PrivateUser {
     private String lastName;
     @Column(nullable = false, unique = true)
     @OibConstraints
-    private Long oib;
+    private String oib;
     @Column(nullable = false)
     private String address;
     @Column(nullable = false, unique = true)
@@ -112,11 +112,11 @@ public class PrivateUser {
         this.lastName = lastName;
     }
 
-    public Long getOib() {
+    public String getOib() {
         return oib;
     }
 
-    public void setOib(Long oib) {
+    public void setOib(String oib) {
         this.oib = oib;
     }
 
