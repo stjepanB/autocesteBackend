@@ -1,14 +1,13 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: "stjepanb/diplomski:autoceste_backend"
     container_name: autoceste_backend
     ports:
       - "18080:9000"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/autocesteBazaPodataka
       - ALLOWED_ORIGIN=http://localhost:3080
+      - MANAGEMENT_SERVER_PORT=8081
     depends_on:
       db:
         condition: service_healthy
@@ -34,4 +33,25 @@ services:
     ports:
       - "3080:80"
     depends_on:
+      - app
+
+  mongo:
+    image: library/mongo:4.4-bionic
+    container_name: "autoceste_mongo"
+    ports:
+      - "27017:27017"
+
+  reconstruction:
+    image: "stjepanb/diplomski:trip_reconstruction"
+    container_name: "trip_reconstruction"
+    ports:
+      - "22233:9234"
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=trip_database
+      - SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE=admin
+      - BACKEND_URL=http://app:9000/api/service
+    depends_on:
+      - mongo
       - app
