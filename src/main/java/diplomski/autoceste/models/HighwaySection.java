@@ -46,8 +46,6 @@ public class HighwaySection {
     @Column(nullable = false)
     @Nonnegative
     private Double outsideCostIV;
-    @Nonnegative
-    @Column(nullable = false)
     private Integer distance;
 
     public Long getId() {
